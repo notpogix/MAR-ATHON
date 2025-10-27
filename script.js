@@ -1,4 +1,5 @@
-// ==== EDIT THESE LISTS MANUALLY ====
+// ==== MANUAL EDIT SECTION ====
+// Only edit these if automatic fetching fails
 
 // Top Sub Gifters
 const topGifters = [
@@ -9,35 +10,7 @@ const topGifters = [
     {username: "editName5", amount: 4}
 ];
 
-// Top Twitch Emotes
-const topTwitchEmotes = [
-    {name: "KEKW", count: 15420},
-    {name: "PogChamp", count: 12890},
-    {name: "MonkaS", count: 9200},
-    {name: "EZ", count: 7650},
-    {name: "OMEGALUL", count: 6100},
-    {name: "5Head", count: 4800},
-    {name: "WeirdChamp", count: 3400},
-    {name: "Pepega", count: 2100},
-    {name: "Sadge", count: 1850},
-    {name: "Pog", count: 1500}
-];
-
-// Top 7TV Emotes
-const top7tvEmotes = [
-    {name: "GIGACHAD", count: 8420},
-    {name: "Aware", count: 6890},
-    {name: "Clueless", count: 5200},
-    {name: "Copium", count: 4650},
-    {name: "ICANT", count: 3100},
-    {name: "Madge", count: 2800},
-    {name: "BatChest", count: 2400},
-    {name: "Listening", count: 2100},
-    {name: "Stare", count: 1850},
-    {name: "EZ Clap", count: 1500}
-];
-
-// ==== FUNCTIONS ====
+// ==== AUTOMATIC FUNCTIONS ====
 
 function getPSTDay() {
     const marathonStart = new Date(Date.UTC(2025, 9, 27, 7, 0, 0));
@@ -67,12 +40,15 @@ async function getFollowers() {
     }
 }
 
-async function getSEChatters() {
+async function getSEData() {
     try {
+        // Try getting full stats data
         const res = await fetch("https://api.streamelements.com/kappa/v2/chatstats/marlon/stats");
         const data = await res.json();
+        console.log("StreamElements full data:", data);
         return data;
     } catch(e) {
+        console.error("SE API error:", e);
         return null;
     }
 }
@@ -90,27 +66,12 @@ function showGifters() {
     document.getElementById("top-gifters-list").innerHTML = html;
 }
 
-function showTwitchEmotes() {
-    let html = "";
-    topTwitchEmotes.forEach((emote,i) => {
-        const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i+1}.`;
-        html += `<li><span class="rank">${medal}</span> <strong>${emote.name}</strong> <span class="count">${formatNumber(emote.count)}</span></li>`;
-    });
-    document.getElementById("emotes-list").innerHTML = html;
-}
-
-function show7tvEmotes() {
-    let html = "";
-    top7tvEmotes.forEach((emote,i) => {
-        const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i+1}.`;
-        html += `<li><span class="rank">${medal}</span> <strong>${emote.name}</strong> <span class="count">${formatNumber(emote.count)}</span></li>`;
-    });
-    document.getElementById("seventv-list").innerHTML = html;
-}
-
 async function updateStats() {
+    console.log("=== UPDATING ALL STATS ===");
+    
     // Update day
-    document.getElementById('marathon-day').textContent = `DAY ${getPSTDay()}`;
+    const day = getPSTDay();
+    document.getElementById('marathon-day').textContent = `DAY ${day}`;
     
     // Update viewers
     const viewers = await getViewerCount();
@@ -120,24 +81,82 @@ async function updateStats() {
     const followers = await getFollowers();
     document.getElementById('follower-count').textContent = formatNumber(followers);
     
-    // Show manual lists
+    // Show manual gifters
     showGifters();
-    showTwitchEmotes();
-    show7tvEmotes();
     
-    // Get chatters from API
-    const stats = await getSEChatters();
-    if (stats && stats.chatters && stats.chatters.length > 0) {
-        let chattersHTML = '';
-        stats.chatters.slice(0, 10).forEach((user, i) => {
-            const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i+1}.`;
-            const count = user.amount || user.count || 0;
-            chattersHTML += `<li><span class="rank">${medal}</span> <strong>${user.username}</strong> <span class="count">${formatNumber(count)}</span></li>`;
-        });
-        document.getElementById('chatters-list').innerHTML = chattersHTML;
+    // Get all StreamElements data
+    const data = await getSEData();
+    
+    if (data) {
+        // TOP CHATTERS
+        if (data.chatters && data.chatters.length > 0) {
+            let chattersHTML = '';
+            data.chatters.slice(0, 10).forEach((user, i) => {
+                const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i+1}.`;
+                const username = user.username || user.name || user.displayName || 'Unknown';
+                const count = user.amount || user.count || user.messages || 0;
+                chattersHTML += `<li><span class="rank">${medal}</span> <strong>${username}</strong> <span class="count">${formatNumber(count)}</span></li>`;
+            });
+            document.getElementById('chatters-list').innerHTML = chattersHTML;
+        }
+        
+        // TOP TWITCH EMOTES
+        if (data.emotes && data.emotes.length > 0) {
+            console.log("Emotes array found:", data.emotes);
+            let twitchHTML = '';
+            // Filter for Twitch emotes (not 7TV)
+            const twitchEmotes = data.emotes.filter(e => !e.seventv && !e.provider || e.provider === 'twitch');
+            twitchEmotes.slice(0, 10).forEach((emote, i) => {
+                const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i+1}.`;
+                const name = emote.code || emote.name || emote.emote || 'Emote';
+                const count = emote.count || emote.amount || emote.value || 0;
+                twitchHTML += `<li><span class="rank">${medal}</span> <strong>${name}</strong> <span class="count">${formatNumber(count)}</span></li>`;
+            });
+            document.getElementById('emotes-list').innerHTML = twitchHTML || '<li style="color:#888;">No Twitch emotes</li>';
+        } else if (data.emotes && typeof data.emotes === 'object') {
+            // Emotes might be nested in an object
+            console.log("Emotes object structure:", Object.keys(data.emotes));
+            
+            // Try common property names
+            const twitchEmotes = data.emotes.twitch || data.emotes.topTwitchEmotes || data.emotes.top || [];
+            if (twitchEmotes.length > 0) {
+                let twitchHTML = '';
+                twitchEmotes.slice(0, 10).forEach((emote, i) => {
+                    const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i+1}.`;
+                    const name = emote.code || emote.name || 'Emote';
+                    const count = emote.count || emote.amount || 0;
+                    twitchHTML += `<li><span class="rank">${medal}</span> <strong>${name}</strong> <span class="count">${formatNumber(count)}</span></li>`;
+                });
+                document.getElementById('emotes-list').innerHTML = twitchHTML;
+            } else {
+                document.getElementById('emotes-list').innerHTML = '<li style="color:#888;">Twitch emote data unavailable</li>';
+            }
+            
+            // TOP 7TV EMOTES
+            const seventvEmotes = data.emotes.seventv || data.emotes.top7tvEmotes || data.emotes['7tv'] || [];
+            if (seventvEmotes.length > 0) {
+                let seventvHTML = '';
+                seventvEmotes.slice(0, 10).forEach((emote, i) => {
+                    const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i+1}.`;
+                    const name = emote.code || emote.name || 'Emote';
+                    const count = emote.count || emote.amount || 0;
+                    seventvHTML += `<li><span class="rank">${medal}</span> <strong>${name}</strong> <span class="count">${formatNumber(count)}</span></li>`;
+                });
+                document.getElementById('seventv-list').innerHTML = seventvHTML;
+            } else {
+                document.getElementById('seventv-list').innerHTML = '<li style="color:#888;">7TV emote data unavailable</li>';
+            }
+        } else {
+            document.getElementById('emotes-list').innerHTML = '<li style="color:#888;">Emote API unavailable</li>';
+            document.getElementById('seventv-list').innerHTML = '<li style="color:#888;">Emote API unavailable</li>';
+        }
     } else {
         document.getElementById('chatters-list').innerHTML = '<li style="color:#888;">Loading...</li>';
+        document.getElementById('emotes-list').innerHTML = '<li style="color:#888;">Loading...</li>';
+        document.getElementById('seventv-list').innerHTML = '<li style="color:#888;">Loading...</li>';
     }
+    
+    console.log("=== UPDATE COMPLETE ===");
 }
 
 // Run on load and every 90 seconds
