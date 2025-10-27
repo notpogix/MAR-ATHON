@@ -1,9 +1,9 @@
-// ==== MANUAL EDIT SECTION ====
+// ==== MANUAL EDIT SECTION - PASTE YOUR EDITED ARRAYS HERE ====
 
 // States covered (edit this number as marathon progresses)
 let statesCovered = 1;
 
-// Top Sub Gifters
+// Top Sub Gifters - PUT YOUR EDITED NAMES HERE
 const topGifters = [
     {username: "lotuslow", amount: 540},
     {username: "Lacy", amount: 100},
@@ -12,27 +12,22 @@ const topGifters = [
     {username: "milesgersh24", amount: 20}
 ];
 
-// Top Bits Donors
+// Top Bits Donors - PUT YOUR EDITED NAMES HERE
 const topBitsDonors = [
-    {username: "
-ammaar70", amount: 1000},
+    {username: "ammaar70", amount: 1000},
     {username: "xankumi", amount: 150},
-    {username: "
-kuroko_611", amount: 45},
+    {username: "kuroko_611", amount: 45},
     {username: "n17legend", amount: 37},
     {username: "Cocofeen", amount: 35}
 ];
 
-// ==== AUTOMATIC FUNCTIONS ====
+// ==== AUTOMATIC FUNCTIONS - DON'T EDIT BELOW ====
 
 function getPSTDay() {
-    // Marathon starts Oct 27, 2025 at 12:00 AM PST (UTC-8)
-    const marathonStart = new Date("2025-10-27T08:00:00Z"); // 12 AM PST = 8 AM UTC
+    const marathonStart = new Date("2025-10-27T08:00:00Z");
     const now = new Date();
     const diffTime = now - marathonStart;
     const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-    
-    // Return day number (1-28)
     const dayNumber = Math.max(1, Math.min(28, diffDays + 1));
     return dayNumber;
 }
@@ -43,6 +38,7 @@ async function getViewerCount() {
         const text = await res.text();
         return text.trim() || "0";
     } catch(e) {
+        console.error("Viewer error:", e);
         return "0";
     }
 }
@@ -53,6 +49,7 @@ async function getFollowers() {
         const text = await res.text();
         return text.trim() || "0";
     } catch(e) {
+        console.error("Follower error:", e);
         return "0";
     }
 }
@@ -63,6 +60,7 @@ async function getSEChatters() {
         const data = await res.json();
         return data;
     } catch(e) {
+        console.error("Chatter error:", e);
         return null;
     }
 }
@@ -90,26 +88,22 @@ function showBitsDonors() {
 }
 
 async function updateStats() {
-    // Update day (auto-calculates based on PST time)
+    console.log("Updating stats...");
+    
     const currentDay = getPSTDay();
     document.getElementById('marathon-day').textContent = `DAY ${currentDay}/28`;
     
-    // Update states covered (manually edited)
     document.getElementById('states-covered').textContent = statesCovered;
     
-    // Update viewers
     const viewers = await getViewerCount();
     document.getElementById('viewer-count').textContent = formatNumber(viewers);
     
-    // Update followers
     const followers = await getFollowers();
     document.getElementById('follower-count').textContent = formatNumber(followers);
     
-    // Show manual lists
     showGifters();
     showBitsDonors();
     
-    // Get chatters from API
     const stats = await getSEChatters();
     if (stats && stats.chatters && stats.chatters.length > 0) {
         let chattersHTML = '';
@@ -123,10 +117,12 @@ async function updateStats() {
     } else {
         document.getElementById('chatters-list').innerHTML = '<li style="color:#888;">Loading...</li>';
     }
+    
+    console.log("Stats updated!");
 }
 
-// Run on load and every 90 seconds
 window.addEventListener('DOMContentLoaded', () => {
+    console.log("Page loaded!");
     updateStats();
     setInterval(updateStats, 90000);
 });
