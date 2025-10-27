@@ -1,31 +1,40 @@
 // ==== MANUAL EDIT SECTION ====
 
+// States covered (edit this number as marathon progresses)
+let statesCovered = 1;
+
 // Top Sub Gifters
 const topGifters = [
-    {username: "editName1", amount: 18},
-    {username: "editName2", amount: 12},
-    {username: "editName3", amount: 8},
-    {username: "editName4", amount: 5},
-    {username: "editName5", amount: 4}
+    {username: "lotuslow", amount: 540},
+    {username: "Lacy", amount: 100},
+    {username: "wuja11", amount: 61},
+    {username: "TBJZL", amount: 20},
+    {username: "milesgersh24", amount: 20}
 ];
 
 // Top Bits Donors
 const topBitsDonors = [
-    {username: "bitUser1", amount: 5000},
-    {username: "bitUser2", amount: 3500},
-    {username: "bitUser3", amount: 2800},
-    {username: "bitUser4", amount: 1200},
-    {username: "bitUser5", amount: 900}
+    {username: "
+ammaar70", amount: 1000},
+    {username: "xankumi", amount: 150},
+    {username: "
+kuroko_611", amount: 45},
+    {username: "n17legend", amount: 37},
+    {username: "Cocofeen", amount: 35}
 ];
 
 // ==== AUTOMATIC FUNCTIONS ====
 
 function getPSTDay() {
-    const marathonStart = new Date(Date.UTC(2025, 9, 27, 7, 0, 0));
-    const nowUTC = new Date();
-    const nowPST = new Date(nowUTC.getTime() - 8*60*60*1000);
-    const dayNum = Math.max(1, Math.floor((nowPST - marathonStart)/86400000) + 1);
-    return dayNum > 28 ? 28 : dayNum;
+    // Marathon starts Oct 27, 2025 at 12:00 AM PST (UTC-8)
+    const marathonStart = new Date("2025-10-27T08:00:00Z"); // 12 AM PST = 8 AM UTC
+    const now = new Date();
+    const diffTime = now - marathonStart;
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    
+    // Return day number (1-28)
+    const dayNumber = Math.max(1, Math.min(28, diffDays + 1));
+    return dayNumber;
 }
 
 async function getViewerCount() {
@@ -81,8 +90,12 @@ function showBitsDonors() {
 }
 
 async function updateStats() {
-    // Update day
-    document.getElementById('marathon-day').textContent = `DAY ${getPSTDay()}`;
+    // Update day (auto-calculates based on PST time)
+    const currentDay = getPSTDay();
+    document.getElementById('marathon-day').textContent = `DAY ${currentDay}/28`;
+    
+    // Update states covered (manually edited)
+    document.getElementById('states-covered').textContent = statesCovered;
     
     // Update viewers
     const viewers = await getViewerCount();
