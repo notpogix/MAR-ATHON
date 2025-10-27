@@ -1,9 +1,9 @@
-// ==== MANUAL EDIT SECTION - PASTE YOUR EDITED ARRAYS HERE ====
+// ==== MANUAL EDIT SECTION ====
 
 // States covered (edit this number as marathon progresses)
 let statesCovered = 1;
 
-// Top Sub Gifters - PUT YOUR EDITED NAMES HERE
+// Top Sub Gifters (Overall Marathon)
 const topGifters = [
     {username: "lotuslow", amount: 540},
     {username: "Lacy", amount: 100},
@@ -12,14 +12,44 @@ const topGifters = [
     {username: "milesgersh24", amount: 20}
 ];
 
-// Top Bits Donors - PUT YOUR EDITED NAMES HERE
+// Top Bits Donors (Overall Marathon)
 const topBitsDonors = [
     {username: "ammaar70", amount: 1000},
     {username: "xankumi", amount: 150},
+    {username: "Nab111222", amount: 100},
     {username: "kuroko_611", amount: 45},
     {username: "n17legend", amount: 37},
-    {username: "Cocofeen", amount: 35}
 ];
+
+// ==== DAILY LEADERBOARDS (EDIT FOR EACH DAY) ====
+
+const dailyData = {
+  day1: {
+    subs: [
+      {username: "lotuslow", amount: 540},
+    {username: "Lacy", amount: 100},
+    {username: "wuja11", amount: 61},
+    {username: "TBJZL", amount: 20},
+    {username: "milesgersh24", amount: 20}
+    ],
+    bits: [
+      {username: "ammaar70", amount: 1000},
+    {username: "xankumi", amount: 150},
+    {username: "Nab111222", amount: 100},
+    {username: "kuroko_611", amount: 45},
+    {username: "n17legend", amount: 37},
+    ]
+  },
+  day2: {
+    subs: [],
+    bits: []
+  },
+  day3: {
+    subs: [],
+    bits: []
+  }
+  // Add more days as needed
+};
 
 // ==== AUTOMATIC FUNCTIONS - DON'T EDIT BELOW ====
 
@@ -87,6 +117,45 @@ function showBitsDonors() {
     document.getElementById("top-bits-list").innerHTML = html;
 }
 
+function showDailyLeaderboards(day) {
+    const dayKey = `day${day}`;
+    const data = dailyData[dayKey];
+    
+    // Update day labels
+    document.getElementById('daily-day-label').textContent = `DAY ${day}`;
+    document.getElementById('daily-day-label2').textContent = `DAY ${day}`;
+    
+    if (!data || (!data.subs && !data.bits)) {
+        document.getElementById('daily-subs-list').innerHTML = '<li style="color:#888;">No data for this day yet</li>';
+        document.getElementById('daily-bits-list').innerHTML = '<li style="color:#888;">No data for this day yet</li>';
+        return;
+    }
+    
+    // Daily Subs
+    let subsHTML = '';
+    if (data.subs && data.subs.length > 0) {
+        data.subs.forEach((s,i) => {
+            const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i+1}.`;
+            subsHTML += `<li><span class="rank">${medal}</span> <strong>${s.username}</strong> <span class="amount">${s.amount}</span></li>`;
+        });
+    } else {
+        subsHTML = '<li style="color:#888;">No sub gifters yet</li>';
+    }
+    document.getElementById('daily-subs-list').innerHTML = subsHTML;
+    
+    // Daily Bits
+    let bitsHTML = '';
+    if (data.bits && data.bits.length > 0) {
+        data.bits.forEach((b,i) => {
+            const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i+1}.`;
+            bitsHTML += `<li><span class="rank">${medal}</span> <strong>${b.username}</strong> <span class="amount">${formatNumber(b.amount)}</span></li>`;
+        });
+    } else {
+        bitsHTML = '<li style="color:#888;">No bits donors yet</li>';
+    }
+    document.getElementById('daily-bits-list').innerHTML = bitsHTML;
+}
+
 async function updateStats() {
     console.log("Updating stats...");
     
@@ -118,6 +187,9 @@ async function updateStats() {
         document.getElementById('chatters-list').innerHTML = '<li style="color:#888;">Loading...</li>';
     }
     
+    // Show daily leaderboards (default Day 1)
+    showDailyLeaderboards(1);
+    
     console.log("Stats updated!");
 }
 
@@ -125,4 +197,12 @@ window.addEventListener('DOMContentLoaded', () => {
     console.log("Page loaded!");
     updateStats();
     setInterval(updateStats, 90000);
+    
+    // Day selector change event
+    const daySelect = document.getElementById('day-select');
+    if (daySelect) {
+        daySelect.addEventListener('change', (e) => {
+            showDailyLeaderboards(parseInt(e.target.value));
+        });
+    }
 });
