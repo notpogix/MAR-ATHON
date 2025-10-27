@@ -1,0 +1,125 @@
+body {
+  background: #181c24;
+  color: #f5f5f5;
+  font-family: 'Inter', Arial, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+}
+header {
+  text-align: center;
+  margin: 30px 0 8px 0;
+}
+h1 {
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.accent { color: #3498db; letter-spacing: 3px; }
+.sub-accent { color: #e74c3c; font-weight: 700; margin-left: 12px; }
+#marathon-day {
+  color: #FFD700;
+  font-size: 1.45rem;
+  margin-bottom: 16px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+.profile-section {
+  text-align: center;
+  margin: 18px 0 28px 0;
+}
+.profile-link {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 10px;
+  background: #232839;
+  padding: 7px 17px;
+  box-shadow: 0 2px 12px #00354d1a;
+  transition: box-shadow 0.16s;
+}
+.profile-link:hover {
+  box-shadow: 0 2px 12px #005ac1b0;
+}
+.profile-img {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  border: 3px solid #3498db;
+}
+.profile-info { display: flex; flex-direction: column; align-items: flex-start; }
+.profile-name { color: #fff; font-size: 1.17rem; font-weight: 700; }
+.profile-badge {
+  color: #4ADE80;
+  background: #262d38;
+  padding: 3px 9px;
+  margin-top: 1px;
+  border-radius: 7px;
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .5px;
+}
+.live-viewers { font-size: 1.10rem; margin-top: 10px; color: #adbde0; }
+
+.main-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  margin: 34px 0 22px 0;
+}
+.info-box {
+  background: #22242e;
+  border-radius: 11px;
+  min-width: 240px;
+  padding: 18px 24px;
+  box-shadow: 0 2px 14px #001d391a;
+  margin: 8px 0;
+  transition: box-shadow 0.16s;
+  flex: 1 1 260px;
+}
+.info-box h2 {
+  margin: 0 0 10px 0;
+  color: #88c7fa;
+  letter-spacing: 1px;
+  font-size: 1.07rem;
+  text-transform: uppercase;
+}
+.big-number {
+  font-size: 2.3rem;
+  color: #FFD700;
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+ol { 
+  text-align: left; 
+  margin: .7em 0 0 1em;
+  font-size: 1.04rem;
+  line-height: 1.6;
+}
+.edit-note { 
+  color: #8899a7; 
+  font-size: .91rem;
+  margin-top: 9px;
+}
+footer {
+  text-align: center;
+  color: #888;
+  padding: 34px 0 18px 0;
+  font-size: 1.07rem;
+  letter-spacing: 1px;
+}
+footer a {
+  color: #81c7fa;
+  font-weight: bold;
+  text-decoration: none;
+}
+footer a:hover {
+  color: #FFD700;
+  text-decoration: underline;
+}
+@media (max-width: 900px) {
+  .main-content { flex-direction: column; }
+  .info-box { min-width: unset; }
+}
