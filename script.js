@@ -1,4 +1,6 @@
-// ==== TOP 5 SUB GIFTERS (EDIT THIS MANUALLY) ====
+// ==== EDIT THESE LISTS MANUALLY ====
+
+// Top Sub Gifters
 const topGifters = [
     {username: "editName1", amount: 18},
     {username: "editName2", amount: 12},
@@ -7,7 +9,7 @@ const topGifters = [
     {username: "editName5", amount: 4}
 ];
 
-// ==== TOP TWITCH EMOTES (EDIT THIS MANUALLY) ====
+// Top Twitch Emotes
 const topTwitchEmotes = [
     {name: "KEKW", count: 15420},
     {name: "PogChamp", count: 12890},
@@ -21,7 +23,7 @@ const topTwitchEmotes = [
     {name: "Pog", count: 1500}
 ];
 
-// ==== TOP 7TV EMOTES (EDIT THIS MANUALLY) ====
+// Top 7TV Emotes
 const top7tvEmotes = [
     {name: "GIGACHAD", count: 8420},
     {name: "Aware", count: 6890},
@@ -34,6 +36,8 @@ const top7tvEmotes = [
     {name: "Stare", count: 1850},
     {name: "EZ Clap", count: 1500}
 ];
+
+// ==== FUNCTIONS ====
 
 function getPSTDay() {
     const marathonStart = new Date(Date.UTC(2025, 9, 27, 7, 0, 0));
@@ -63,15 +67,18 @@ async function getFollowers() {
     }
 }
 
-async function getSEStats() {
+async function getSEChatters() {
     try {
         const res = await fetch("https://api.streamelements.com/kappa/v2/chatstats/marlon/stats");
         const data = await res.json();
         return data;
     } catch(e) {
-        console.error("SE API Error:", e);
         return null;
     }
+}
+
+function formatNumber(num) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 function showGifters() {
@@ -101,16 +108,15 @@ function show7tvEmotes() {
     document.getElementById("seventv-list").innerHTML = html;
 }
 
-function formatNumber(num) {
-    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-
 async function updateStats() {
+    // Update day
     document.getElementById('marathon-day').textContent = `DAY ${getPSTDay()}`;
     
+    // Update viewers
     const viewers = await getViewerCount();
     document.getElementById('viewer-count').textContent = formatNumber(viewers);
     
+    // Update followers
     const followers = await getFollowers();
     document.getElementById('follower-count').textContent = formatNumber(followers);
     
@@ -119,8 +125,8 @@ async function updateStats() {
     showTwitchEmotes();
     show7tvEmotes();
     
-    // Get StreamElements chatters (this still works)
-    const stats = await getSEStats();
+    // Get chatters from API
+    const stats = await getSEChatters();
     if (stats && stats.chatters && stats.chatters.length > 0) {
         let chattersHTML = '';
         stats.chatters.slice(0, 10).forEach((user, i) => {
@@ -130,10 +136,11 @@ async function updateStats() {
         });
         document.getElementById('chatters-list').innerHTML = chattersHTML;
     } else {
-        document.getElementById('chatters-list').innerHTML = '<li style="color:#888;">Loading chatters...</li>';
+        document.getElementById('chatters-list').innerHTML = '<li style="color:#888;">Loading...</li>';
     }
 }
 
+// Run on load and every 90 seconds
 window.addEventListener('DOMContentLoaded', () => {
     updateStats();
     setInterval(updateStats, 90000);
