@@ -119,44 +119,54 @@ async function updateStats() {
         }
         
         // Top Twitch Emotes
+                // Top Twitch Emotes
         if (stats.emotes) {
-            const twitchEmotes = stats.emotes.topTwitchEmotes || stats.emotes.top || [];
+            // Try different possible property names
+            const twitchEmotes = stats.emotes.topTwitchEmotes || 
+                                 stats.emotes.top || 
+                                 stats.emotes.emotes || 
+                                 [];
+            
+            console.log("Twitch emotes:", twitchEmotes); // Debug
+            
             if (twitchEmotes.length > 0) {
                 let twitchEmotesHTML = '';
                 twitchEmotes.slice(0, 10).forEach((emote, i) => {
                     const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i+1}.`;
-                    const count = emote.amount || emote.count || 0;
-                    twitchEmotesHTML += `<li><span class="rank">${medal}</span> <strong>${emote.code || emote.name || 'Unknown'}</strong> <span class="count">${formatNumber(count)}</span></li>`;
+                    const count = emote.amount || emote.count || emote.value || 0;
+                    const name = emote.code || emote.name || emote.emote || 'Unknown';
+                    twitchEmotesHTML += `<li><span class="rank">${medal}</span> <strong>${name}</strong> <span class="count">${formatNumber(count)}</span></li>`;
                 });
                 document.getElementById('emotes-list').innerHTML = twitchEmotesHTML;
             } else {
-                document.getElementById('emotes-list').innerHTML = '<li style="color:#888;">No data available</li>';
+                document.getElementById('emotes-list').innerHTML = '<li style="color:#888;">No Twitch emote data</li>';
             }
             
             // Top 7TV Emotes
-            const seventv = stats.emotes.top7tvEmotes || [];
+            const seventv = stats.emotes.top7tvEmotes || 
+                           stats.emotes.topSevenTvEmotes || 
+                           stats.emotes['7tv'] || 
+                           [];
+            
+            console.log("7TV emotes:", seventv); // Debug
+            
             if (seventv.length > 0) {
                 let seventvHTML = '';
                 seventv.slice(0, 10).forEach((emote, i) => {
                     const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i+1}.`;
-                    const count = emote.amount || emote.count || 0;
-                    seventvHTML += `<li><span class="rank">${medal}</span> <strong>${emote.code || emote.name || 'Unknown'}</strong> <span class="count">${formatNumber(count)}</span></li>`;
+                    const count = emote.amount || emote.count || emote.value || 0;
+                    const name = emote.code || emote.name || emote.emote || 'Unknown';
+                    seventvHTML += `<li><span class="rank">${medal}</span> <strong>${name}</strong> <span class="count">${formatNumber(count)}</span></li>`;
                 });
                 document.getElementById('seventv-list').innerHTML = seventvHTML;
             } else {
-                document.getElementById('seventv-list').innerHTML = '<li style="color:#888;">No data available</li>';
+                document.getElementById('seventv-list').innerHTML = '<li style="color:#888;">No 7TV emote data</li>';
             }
         } else {
-            document.getElementById('emotes-list').innerHTML = '<li style="color:#888;">No emote data</li>';
-            document.getElementById('seventv-list').innerHTML = '<li style="color:#888;">No emote data</li>';
+            document.getElementById('emotes-list').innerHTML = '<li style="color:#888;">Emote API unavailable</li>';
+            document.getElementById('seventv-list').innerHTML = '<li style="color:#888;">Emote API unavailable</li>';
         }
-    } else {
-        console.error("No SE stats received");
-        document.getElementById('chatters-list').innerHTML = '<li style="color:#888;">Failed to load data</li>';
-        document.getElementById('emotes-list').innerHTML = '<li style="color:#888;">Failed to load data</li>';
-        document.getElementById('seventv-list').innerHTML = '<li style="color:#888;">Failed to load data</li>';
-    }
-}
+
 
 // Run on load and every 90 seconds
 window.addEventListener('DOMContentLoaded', () => {
