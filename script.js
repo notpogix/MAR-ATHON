@@ -11,7 +11,7 @@ const statesList = [
 
 // Top Sub Gifters (Overall Marathon)
 const topGifters = [
-    {username: "lotuslow", amount: 540},
+    {username: "lotuslow", amount: 640},
     {username: "CORINNAKOPF", amount: 400},
     {username: "Lacy", amount: 100},
     {username: "wuja11", amount: 61},
@@ -32,7 +32,7 @@ const topBitsDonors = [
 const dailyData = {
   day1: {
     subs: [
-      {username: "lotuslow", amount: 540},
+      {username: "lotuslow", amount: 640},
       {username: "CORINNAKOPF", amount: 400},
       {username: "Lacy", amount: 100},
       {username: "wuja11", amount: 61},
@@ -166,11 +166,17 @@ function showStatesList() {
   const container = document.getElementById('states-list');
   if (!container) return;
   if (statesList.length === 0) {
-    container.innerHTML = '<li style="color:#888;">No states covered yet</li>';
+    container.innerHTML = '<li style="color:#aaa; font-style:italic;">No states covered yet!</li>';
     return;
   }
-  container.innerHTML = statesList.map(state => `<li>${state}</li>`).join('');
+  container.innerHTML = statesList.map(state =>
+    `<li class="covered-state">
+      <span class="state-badge">🌟</span>
+      <span class="state-name">${state}</span>
+    </li>`
+  ).join('');
 }
+
 
 async function updateStats() {
     console.log("Updating stats...");
