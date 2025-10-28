@@ -6,10 +6,10 @@ let statesCovered = 1;
 // Top Sub Gifters (Overall Marathon)
 const topGifters = [
     {username: "lotuslow", amount: 540},
+    {username: "CORINNAKOPF", amount: 20},
     {username: "Lacy", amount: 100},
     {username: "wuja11", amount: 61},
-    {username: "TBJZL", amount: 20},
-    {username: "milesgersh24", amount: 20}
+    {username: "TBJZL", amount: 20}
 ];
 
 // Top Bits Donors (Overall Marathon)
@@ -27,10 +27,10 @@ const dailyData = {
   day1: {
     subs: [
       {username: "lotuslow", amount: 540},
+    {username: "CORINNAKOPF", amount: 20},
     {username: "Lacy", amount: 100},
     {username: "wuja11", amount: 61},
-    {username: "TBJZL", amount: 20},
-    {username: "milesgersh24", amount: 20}
+    {username: "TBJZL", amount: 20}
     ],
     bits: [
       {username: "ammaar70", amount: 1000},
