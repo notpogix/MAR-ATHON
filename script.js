@@ -1,7 +1,13 @@
 // ==== MANUAL EDIT SECTION ====
 
 // States covered (edit this number as marathon progresses)
-let statesCovered = 1;
+let statesCovered = 2;
+
+const statesList = [
+  "LA",
+  "Las Vegas"
+  // Add more states as you visit them (e.g., "Arizona", ...)
+];
 
 // Top Sub Gifters (Overall Marathon)
 const topGifters = [
