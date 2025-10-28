@@ -6,7 +6,7 @@ let statesCovered = 2;
 const statesList = [
   "LA",
   "Las Vegas"
-  // Add more states as you visit them (e.g., "Arizona", ...)
+  // Add more states as you visit them
 ];
 
 // Top Sub Gifters (Overall Marathon)
@@ -33,17 +33,17 @@ const dailyData = {
   day1: {
     subs: [
       {username: "lotuslow", amount: 540},
-    {username: "CORINNAKOPF", amount: 400},
-    {username: "Lacy", amount: 100},
-    {username: "wuja11", amount: 61},
-    {username: "TBJZL", amount: 20}
+      {username: "CORINNAKOPF", amount: 400},
+      {username: "Lacy", amount: 100},
+      {username: "wuja11", amount: 61},
+      {username: "TBJZL", amount: 20}
     ],
     bits: [
       {username: "ammaar70", amount: 1000},
-    {username: "xankumi", amount: 150},
-    {username: "Nab111222", amount: 100},
-    {username: "kuroko_611", amount: 45},
-    {username: "n17legend", amount: 37},
+      {username: "xankumi", amount: 150},
+      {username: "Nab111222", amount: 100},
+      {username: "kuroko_611", amount: 45},
+      {username: "n17legend", amount: 37},
     ]
   },
   day2: {
@@ -162,6 +162,16 @@ function showDailyLeaderboards(day) {
     document.getElementById('daily-bits-list').innerHTML = bitsHTML;
 }
 
+function showStatesList() {
+  const container = document.getElementById('states-list');
+  if (!container) return;
+  if (statesList.length === 0) {
+    container.innerHTML = '<li style="color:#888;">No states covered yet</li>';
+    return;
+  }
+  container.innerHTML = statesList.map(state => `<li>${state}</li>`).join('');
+}
+
 async function updateStats() {
     console.log("Updating stats...");
     
@@ -169,6 +179,9 @@ async function updateStats() {
     document.getElementById('marathon-day').textContent = `DAY ${currentDay}/28`;
     
     document.getElementById('states-covered').textContent = statesCovered;
+
+    // Show state names
+    showStatesList();
     
     const viewers = await getViewerCount();
     document.getElementById('viewer-count').textContent = formatNumber(viewers);
