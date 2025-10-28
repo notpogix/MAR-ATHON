@@ -11,11 +11,11 @@ const statesList = [
 
 // Top Sub Gifters (Overall Marathon)
 const topGifters = [
-    {username: "lotuslow", amount: 640},
+    {username: "lotuslow", amount: 645},
     {username: "CORINNAKOPF", amount: 400},
+  {username: "inOSMY", amount: 150},
     {username: "Lacy", amount: 100},
     {username: "wuja11", amount: 61},
-    {username: "TBJZL", amount: 20}
 ];
 
 // Top Bits Donors (Overall Marathon)
@@ -32,11 +32,11 @@ const topBitsDonors = [
 const dailyData = {
   day1: {
     subs: [
-      {username: "lotuslow", amount: 640},
-      {username: "CORINNAKOPF", amount: 400},
-      {username: "Lacy", amount: 100},
-      {username: "wuja11", amount: 61},
-      {username: "TBJZL", amount: 20}
+      {username: "lotuslow", amount: 645},
+    {username: "CORINNAKOPF", amount: 400},
+  {username: "inOSMY", amount: 150},
+    {username: "Lacy", amount: 100},
+    {username: "wuja11", amount: 61}
     ],
     bits: [
       {username: "CORINNAKOPF", amount: 10000},
@@ -47,8 +47,20 @@ const dailyData = {
     ]
   },
   day2: {
-    subs: [],
-    bits: []
+    subs: [
+      {username: "lotuslow", amount: 645},
+    {username: "CORINNAKOPF", amount: 400},
+  {username: "inOSMY", amount: 150},
+    {username: "Lacy", amount: 100},
+    {username: "wuja11", amount: 61}
+    ],
+    bits: [
+      {username: "CORINNAKOPF", amount: 10000},
+    {username: "ammaar70", amount: 1000},
+    {username: "xankumi", amount: 150},
+    {username: "Nab111222", amount: 100},
+    {username: "kuroko_611", amount: 45}
+    ]
   },
   day3: {
     subs: [],
