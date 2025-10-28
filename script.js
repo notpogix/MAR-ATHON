@@ -5,8 +5,8 @@ let statesCovered = 3;
 
 const statesList = [
   "LA",
-  "Las Vegas"
-  "Arizona"
+  "Las Vegas",
+  "Arizona",
   // Add more states as you visit them
 ];
 
