@@ -25,7 +25,7 @@ const topBitsDonors = [
     {username: "ammaar70", amount: 1000},
     {username: "xankumi", amount: 150},
     {username: "Nab111222", amount: 100},
-    {username: "kuroko_611", amount: 45},
+    {username: "beccalee012", amount: 95},
 ];
 
 // ==== DAILY LEADERBOARDS (EDIT FOR EACH DAY) ====
@@ -60,7 +60,7 @@ const dailyData = {
     {username: "ammaar70", amount: 1000},
     {username: "xankumi", amount: 150},
     {username: "Nab111222", amount: 100},
-    {username: "kuroko_611", amount: 45}
+    {username: "beccalee012", amount: 95}
     ]
   },
   day3: {
