@@ -17,16 +17,17 @@ const topGifters = [
     {username: "CORINNAKOPF", amount: 400},
   {username: "inOSMY", amount: 150},
     {username: "Lacy", amount: 100},
-    {username: "wuja11", amount: 61},
+    {username: "nicoplingpoong34", amount: 89},
 ];
 
 // Top Bits Donors (Overall Marathon)
 const topBitsDonors = [
   {username: "CORINNAKOPF", amount: 10000},
+  {username: "imkotd", amount: 1100},
     {username: "ammaar70", amount: 1000},
     {username: "xankumi", amount: 150},
     {username: "Nab111222", amount: 100},
-    {username: "clankeraura", amount: 100},
+    
 ];
 
 // ==== DAILY LEADERBOARDS (EDIT FOR EACH DAY) ====
@@ -70,14 +71,14 @@ const dailyData = {
     {username: "CORINNAKOPF", amount: 400},
   {username: "inOSMY", amount: 150},
     {username: "Lacy", amount: 100},
-    {username: "wuja11", amount: 61}
+    {username: "nicoplingpoong34", amount: 89}
     ],
     bits: [
       {username: "CORINNAKOPF", amount: 10000},
+  {username: "imkotd", amount: 1100},
     {username: "ammaar70", amount: 1000},
     {username: "xankumi", amount: 150},
-    {username: "Nab111222", amount: 100},
-    {username: "clankeraura", amount: 100}
+    {username: "Nab111222", amount: 100}
     ]
   }
   // Add more days as needed
