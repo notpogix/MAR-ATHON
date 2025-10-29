@@ -1,12 +1,13 @@
 // ==== MANUAL EDIT SECTION ====
 
 // States covered (edit this number as marathon progresses)
-let statesCovered = 3;
+let statesCovered = 4;
 
 const statesList = [
   "LA",
   "Las Vegas",
   "Arizona",
+  "New Mexico",
   // Add more states as you visit them
 ];
 
@@ -64,8 +65,20 @@ const dailyData = {
     ]
   },
   day3: {
-    subs: [],
-    bits: []
+    subs: [
+      {username: "lotuslow", amount: 645},
+    {username: "CORINNAKOPF", amount: 400},
+  {username: "inOSMY", amount: 150},
+    {username: "Lacy", amount: 100},
+    {username: "wuja11", amount: 61}
+    ],
+    bits: [
+      {username: "CORINNAKOPF", amount: 10000},
+    {username: "ammaar70", amount: 1000},
+    {username: "xankumi", amount: 150},
+    {username: "Nab111222", amount: 100},
+    {username: "clankeraura", amount: 100}
+    ]
   }
   // Add more days as needed
 };
