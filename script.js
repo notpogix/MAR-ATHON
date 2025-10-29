@@ -16,8 +16,8 @@ const statesList = [
 // Top Sub Gifters (Overall Marathon)
 const topGifters = [
     {username: "lotuslow", amount: 645},
+  {username: "CORINNAKOPF", amount: 400},
   {username: "AlabamaBarker", amount: 300},
-    {username: "CORINNAKOPF", amount: 400},
   {username: "inOSMY", amount: 150},
     {username: "Lacy", amount: 100},
 ];
@@ -70,8 +70,8 @@ const dailyData = {
   day3: {
     subs: [
       {username: "lotuslow", amount: 645},
+      {username: "CORINNAKOPF", amount: 400},
   {username: "AlabamaBarker", amount: 300},
-    {username: "CORINNAKOPF", amount: 400},
   {username: "inOSMY", amount: 150},
     {username: "Lacy", amount: 100},
     ],
