@@ -86,10 +86,10 @@ const dailyData = {
   day4: {
     subs: [
       {username: "lotuslow", amount: 1689},
-  {username: "roydigy", amount: 502},
   {username: "CORINNAKOPF", amount: 400},
   {username: "AlabamaBarker", amount: 300},
   {username: "inOSMY", amount: 282},
+  {username: "itsNickThePlug", amount: 221},
     ],
     bits: [
       {username: "CORINNAKOPF", amount: 10000},
