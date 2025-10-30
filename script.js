@@ -1,7 +1,7 @@
 // ==== MANUAL EDIT SECTION ====
 
 // States covered (edit this number as marathon progresses)
-let statesCovered = 6;
+let statesCovered = 7;
 
 const statesList = [
   "LA",
@@ -10,6 +10,7 @@ const statesList = [
   "New Mexico",
   "Denver",
   "Wyoming",
+  "Utah",
   // Add more states as you visit them
 ];
 
