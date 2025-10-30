@@ -15,11 +15,11 @@ const statesList = [
 
 // Top Sub Gifters (Overall Marathon)
 const topGifters = [
-    {username: "lotuslow", amount: 645},
+    {username: "lotuslow", amount: 1689},
+  {username: "roydigy", amount: 502},
   {username: "CORINNAKOPF", amount: 400},
   {username: "AlabamaBarker", amount: 300},
-  {username: "inOSMY", amount: 150},
-    {username: "Lacy", amount: 100},
+  {username: "inOSMY", amount: 282},
 ];
 
 // Top Bits Donors (Overall Marathon)
@@ -27,8 +27,8 @@ const topBitsDonors = [
   {username: "CORINNAKOPF", amount: 10000},
   {username: "imkotd", amount: 1100},
     {username: "ammaar70", amount: 1000},
-    {username: "xankumi", amount: 150},
-    {username: "Nab111222", amount: 100},
+    {username: "hulk__hug", amount: 750},
+    {username: "magically_lee", amount: 743},
     
 ];
 
@@ -69,20 +69,37 @@ const dailyData = {
   },
   day3: {
     subs: [
-      {username: "lotuslow", amount: 645},
-      {username: "CORINNAKOPF", amount: 400},
+      {username: "lotuslow", amount: 1689},
+  {username: "roydigy", amount: 502},
+  {username: "CORINNAKOPF", amount: 400},
   {username: "AlabamaBarker", amount: 300},
-  {username: "inOSMY", amount: 150},
-    {username: "Lacy", amount: 100},
+  {username: "inOSMY", amount: 282},
     ],
     bits: [
       {username: "CORINNAKOPF", amount: 10000},
   {username: "imkotd", amount: 1100},
     {username: "ammaar70", amount: 1000},
-    {username: "xankumi", amount: 150},
-    {username: "Nab111222", amount: 100}
+    {username: "hulk__hug", amount: 750},
+    {username: "magically_lee", amount: 743},
+    ]
+  },
+  day4: {
+    subs: [
+      {username: "lotuslow", amount: 1689},
+  {username: "roydigy", amount: 502},
+  {username: "CORINNAKOPF", amount: 400},
+  {username: "AlabamaBarker", amount: 300},
+  {username: "inOSMY", amount: 282},
+    ],
+    bits: [
+      {username: "CORINNAKOPF", amount: 10000},
+  {username: "imkotd", amount: 1100},
+    {username: "ammaar70", amount: 1000},
+    {username: "hulk__hug", amount: 750},
+    {username: "magically_lee", amount: 743},
     ]
   }
+   
   // Add more days as needed
 };
 
