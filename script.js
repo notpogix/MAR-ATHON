@@ -1,7 +1,7 @@
 // ==== MANUAL EDIT SECTION ====
 
 // States covered (edit this number as marathon progresses)
-let statesCovered = 7;
+let statesCovered = 8;
 
 const statesList = [
   "LA",
@@ -11,6 +11,7 @@ const statesList = [
   "Denver",
   "Wyoming",
   "Utah",
+  "Idaho",
   // Add more states as you visit them
 ];
 
@@ -99,7 +100,23 @@ const dailyData = {
     {username: "hulk__hug", amount: 750},
     {username: "magically_lee", amount: 743},
     ]
-  }
+  },
+  day5: {
+    subs: [
+      {username: "lotuslow", amount: 1689},
+  {username: "CORINNAKOPF", amount: 400},
+  {username: "AlabamaBarker", amount: 300},
+  {username: "inOSMY", amount: 282},
+  {username: "itsNickThePlug", amount: 221},
+    ],
+    bits: [
+      {username: "CORINNAKOPF", amount: 10000},
+  {username: "imkotd", amount: 1100},
+    {username: "ammaar70", amount: 1000},
+    {username: "hulk__hug", amount: 750},
+    {username: "magically_lee", amount: 743},
+    ]
+  },
    
   // Add more days as needed
 };
